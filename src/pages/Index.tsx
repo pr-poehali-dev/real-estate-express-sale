@@ -4,7 +4,9 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Badge } from '@/components/ui/badge'
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import Icon from '@/components/ui/icon'
+import PropertyCalculator from '@/components/PropertyCalculator'
 
 const Index = () => {
   const [propertyPrice, setPropertyPrice] = useState(5000000)
@@ -308,10 +310,10 @@ const Index = () => {
       </section>
 
       <section id="calculator" className="py-20">
-        <div className="container max-w-4xl">
+        <div className="container max-w-6xl">
           <div className="text-center mb-12 space-y-4 animate-fade-in">
             <Badge variant="outline" className="border-primary text-primary">
-              Калькулятор комиссии
+              Калькуляторы
             </Badge>
             <h2 className="text-4xl md:text-5xl font-bold font-heading">
               Рассчитайте стоимость{' '}
@@ -320,70 +322,89 @@ const Index = () => {
               </span>
             </h2>
             <p className="text-xl text-muted-foreground">
-              Прозрачные условия и честные цены
+              AI оценка недвижимости и расчет комиссии
             </p>
           </div>
 
-          <Card className="shadow-2xl border-2 animate-scale-in">
-            <CardHeader>
-              <CardTitle className="text-2xl font-heading">Калькулятор комиссии</CardTitle>
-              <CardDescription>
-                Введите стоимость недвижимости, и мы рассчитаем нашу комиссию
-              </CardDescription>
-            </CardHeader>
-            <CardContent className="space-y-6">
-              <div className="space-y-2">
-                <Label htmlFor="price" className="text-base">Стоимость недвижимости (₽)</Label>
-                <Input
-                  id="price"
-                  type="number"
-                  value={propertyPrice}
-                  onChange={(e) => setPropertyPrice(Number(e.target.value))}
-                  className="text-lg h-12"
-                  placeholder="5000000"
-                />
-              </div>
+          <Tabs defaultValue="ai-valuation" className="w-full">
+            <TabsList className="grid w-full max-w-md mx-auto grid-cols-2 mb-8">
+              <TabsTrigger value="ai-valuation" className="text-base">
+                <Icon name="Sparkles" size={18} className="mr-2" />
+                AI Оценка квартиры
+              </TabsTrigger>
+              <TabsTrigger value="commission" className="text-base">
+                <Icon name="Calculator" size={18} className="mr-2" />
+                Комиссия
+              </TabsTrigger>
+            </TabsList>
 
-              <div className="bg-muted/50 rounded-xl p-6 space-y-4">
-                <h3 className="font-semibold font-heading text-lg">Тарифы:</h3>
-                <div className="space-y-3 text-sm">
-                  <div className="flex justify-between items-center pb-2 border-b">
-                    <span className="text-muted-foreground">До 3 млн ₽</span>
-                    <Badge variant="outline">3%</Badge>
-                  </div>
-                  <div className="flex justify-between items-center pb-2 border-b">
-                    <span className="text-muted-foreground">От 3 до 10 млн ₽</span>
-                    <Badge variant="outline">2.5%</Badge>
-                  </div>
-                  <div className="flex justify-between items-center">
-                    <span className="text-muted-foreground">Свыше 10 млн ₽</span>
-                    <Badge variant="outline">2%</Badge>
-                  </div>
-                </div>
-              </div>
+            <TabsContent value="ai-valuation" className="animate-fade-in">
+              <PropertyCalculator />
+            </TabsContent>
 
-              <Button
-                onClick={calculateCommission}
-                className="w-full h-12 text-lg bg-gradient-to-r from-primary to-secondary hover:opacity-90"
-              >
-                <Icon name="Calculator" size={20} className="mr-2" />
-                Рассчитать комиссию
-              </Button>
+            <TabsContent value="commission" className="animate-fade-in">
+              <Card className="shadow-2xl border-2 animate-scale-in max-w-4xl mx-auto">
+                <CardHeader>
+                  <CardTitle className="text-2xl font-heading">Калькулятор комиссии</CardTitle>
+                  <CardDescription>
+                    Введите стоимость недвижимости, и мы рассчитаем нашу комиссию
+                  </CardDescription>
+                </CardHeader>
+                <CardContent className="space-y-6">
+                  <div className="space-y-2">
+                    <Label htmlFor="price" className="text-base">Стоимость недвижимости (₽)</Label>
+                    <Input
+                      id="price"
+                      type="number"
+                      value={propertyPrice}
+                      onChange={(e) => setPropertyPrice(Number(e.target.value))}
+                      className="text-lg h-12"
+                      placeholder="5000000"
+                    />
+                  </div>
 
-              {calculatedCommission > 0 && (
-                <div className="bg-gradient-to-r from-primary/10 to-secondary/10 rounded-xl p-6 text-center animate-scale-in border-2 border-primary/20">
-                  <p className="text-sm text-muted-foreground mb-2">Наша комиссия составит:</p>
-                  <p className="text-4xl font-bold font-heading bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
-                    {calculatedCommission.toLocaleString('ru-RU')} ₽
-                  </p>
-                  <p className="text-sm text-muted-foreground mt-4">
-                    <Icon name="CheckCircle2" size={16} className="inline mr-1 text-primary" />
-                    Включает полное юридическое сопровождение
-                  </p>
-                </div>
-              )}
-            </CardContent>
-          </Card>
+                  <div className="bg-muted/50 rounded-xl p-6 space-y-4">
+                    <h3 className="font-semibold font-heading text-lg">Тарифы:</h3>
+                    <div className="space-y-3 text-sm">
+                      <div className="flex justify-between items-center pb-2 border-b">
+                        <span className="text-muted-foreground">До 3 млн ₽</span>
+                        <Badge variant="outline">3%</Badge>
+                      </div>
+                      <div className="flex justify-between items-center pb-2 border-b">
+                        <span className="text-muted-foreground">От 3 до 10 млн ₽</span>
+                        <Badge variant="outline">2.5%</Badge>
+                      </div>
+                      <div className="flex justify-between items-center">
+                        <span className="text-muted-foreground">Свыше 10 млн ₽</span>
+                        <Badge variant="outline">2%</Badge>
+                      </div>
+                    </div>
+                  </div>
+
+                  <Button
+                    onClick={calculateCommission}
+                    className="w-full h-12 text-lg bg-gradient-to-r from-primary to-secondary hover:opacity-90"
+                  >
+                    <Icon name="Calculator" size={20} className="mr-2" />
+                    Рассчитать комиссию
+                  </Button>
+
+                  {calculatedCommission > 0 && (
+                    <div className="bg-gradient-to-r from-primary/10 to-secondary/10 rounded-xl p-6 text-center animate-scale-in border-2 border-primary/20">
+                      <p className="text-sm text-muted-foreground mb-2">Наша комиссия составит:</p>
+                      <p className="text-4xl font-bold font-heading bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
+                        {calculatedCommission.toLocaleString('ru-RU')} ₽
+                      </p>
+                      <p className="text-sm text-muted-foreground mt-4">
+                        <Icon name="CheckCircle2" size={16} className="inline mr-1 text-primary" />
+                        Включает полное юридическое сопровождение
+                      </p>
+                    </div>
+                  )}
+                </CardContent>
+              </Card>
+            </TabsContent>
+          </Tabs>
         </div>
       </section>
 
