@@ -145,7 +145,7 @@ const CalculatorCTASection = () => {
               </div>
               <div className="flex items-center gap-2">
                 <Icon name="MapPin" size={18} />
-                <span>Оренбург, ул. Советская, 25</span>
+                <span>Оренбург, ул. Терешковой, 26</span>
               </div>
               <div className="flex items-center gap-2">
                 <Icon name="Award" size={18} />
