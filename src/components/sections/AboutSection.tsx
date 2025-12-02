@@ -32,7 +32,7 @@ const AboutSection = () => {
             <div className="relative animate-scale-in order-2 lg:order-1">
               <div className="absolute -inset-4 bg-gradient-to-r from-accent to-primary rounded-3xl blur-2xl opacity-20 animate-pulse" />
               <img
-                src="https://cdn.poehali.dev/projects/0dde1022-a2dc-419f-a3e5-691cba9e9742/files/57d48ddc-d6dd-45c0-a7e1-ec0db52bdee3.jpg"
+                src="https://cdn.poehali.dev/files/4a25b7de-63fa-44c4-8e85-e10998007bfa.jpg"
                 alt="Команда РиэлтЭксперт"
                 className="relative rounded-3xl shadow-2xl w-full object-cover"
               />
