@@ -26,7 +26,7 @@ const PropertyCalculator = () => {
     floor: 5,
     totalFloors: 10,
     condition: 'good',
-    district: 'center',
+    district: 'central',
     hasBalcony: true,
     hasParking: false
   })
@@ -41,10 +41,11 @@ const PropertyCalculator = () => {
     setTimeout(() => {
       let basePrice = 65000
       
-      if (propertyData.district === 'center') basePrice = 85000
-      else if (propertyData.district === 'south') basePrice = 70000
-      else if (propertyData.district === 'north') basePrice = 60000
-      else if (propertyData.district === 'east') basePrice = 55000
+      if (propertyData.district === 'central') basePrice = 85000
+      else if (propertyData.district === 'leninsky') basePrice = 70000
+      else if (propertyData.district === 'dzerzhinskiy') basePrice = 60000
+      else if (propertyData.district === 'promyshlenny') basePrice = 58000
+      else if (propertyData.district === 'south') basePrice = 55000
       
       if (propertyData.condition === 'renovated') basePrice *= 1.15
       else if (propertyData.condition === 'new') basePrice *= 1.25
@@ -175,11 +176,11 @@ const PropertyCalculator = () => {
                 <SelectValue />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="center">Центральный</SelectItem>
-                <SelectItem value="south">Южный</SelectItem>
-                <SelectItem value="north">Северный</SelectItem>
-                <SelectItem value="east">Восточный</SelectItem>
-                <SelectItem value="west">Западный</SelectItem>
+                <SelectItem value="central">Центральный</SelectItem>
+                <SelectItem value="dzerzhinskiy">Дзержинский (северная часть)</SelectItem>
+                <SelectItem value="leninsky">Ленинский (восточная и южная части)</SelectItem>
+                <SelectItem value="promyshlenny">Промышленный (западная часть)</SelectItem>
+                <SelectItem value="south">Южный (за рекой Урал)</SelectItem>
               </SelectContent>
             </Select>
           </div>
